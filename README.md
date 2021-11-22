@@ -4,7 +4,7 @@ Der Versuch, Chrigis komplexe SVG-Engine aufs Minimum herunterzubrechen.
 
 Die Engine ist kein Objekt mit Methoden, sondern besteht nur aus ein paar Funktionen.
 
-## theSVG
+## theSVG
 
 Die Variable, die das SVG-Element enthält
 
