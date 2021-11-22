@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Mini-Engine</title>
+</head>
+<body>
+</body>
+<script>
+ 
+  // Den SVG-Standard-Link in Variable speichern.
+  const svgNs = "http://www.w3.org/2000/svg"
+
+  // SVG-Element generieren, geht nur mit createElementNS
+  let theSvg = document.createElementNS(svgNs, "svg")
+
+  // Macht SVG-Element zu Kind des <body> Tags.
+  document.body.appendChild(theSvg)
+  // Ab jetzt ist es im «Inspektor» sichtbar.
+
+  function newCircle(x, y, rad, col) {
+    // Macht ein neues Circle-Element.
+    let brandNewCircle = document.createElementNS(svgNs, "circle")
+    // stellt alle nötigen Attribute ein
+    brandNewCircle.setAttribute ("cx", x)
+    brandNewCircle.setAttribute ("cy", y)
+    brandNewCircle.setAttribute ("r", rad)
+    brandNewCircle.setAttribute ("fill", col)
+    // Macht das Circle-Element zum Kind des SVG-Elements.
+    theSvg.appendChild (brandNewCircle)
+    // Gibt das Circle-Element zurück, so dass es in eine Variable
+    // geschrieben werden kann.
+    return brandNewCircle
+  }
+
+  function getCirclePos(circle) {
+    // Gibt die Werte der Attribute cx und cy zurück.
+    // Number() konvertiert einen String in eine Zahl.
+    let cx = Number(circle.getAttribute("cx"))
+    let cy = Number(circle.getAttribute("cy"))
+    return {x: cx, y: cy}
+  }
+
+  function updateCirclePos(targetCircle, newX, newY) {
+    // Überschreibt die Werte der Attribute cx und cy,
+    // dadurch erählt ein Kreis ein neues Zentrum.
+    targetCircle.setAttribute("cx", newX)
+    targetCircle.setAttribute("cy", newY)
+  }
+
+  // Elemente machen kostet Rechenkraft. Darum werden die Circle-Elemente
+  // ausserhalb des Animations-Loops generiert.
+  myBagOfCircles = []
+  myBagOfCircles.push(newCircle(10, 10, 10, "tomato"))
+  myBagOfCircles.push(newCircle(30, 50, 10, "palegreen"))
+  myBagOfCircles.push(newCircle(100, 40, 10, "dodgerblue"))
+
+  // Im Animations-Loop werden nur Positionsdaten verändert,
+  // es werden keine neuen circle-Elemente generiert.
+  function loop (time) {
+    for (let circle of myBagOfCircles) {
+      let pos = getCirclePos(circle)
+      let newX = pos.x + Math.random() * 2 - 1 // zufällig eins nach links/rechts
+      let newY = pos.y + Math.random() * 2 - 1 // zufällig eins nach oben/unten
+      updateCirclePos(circle, newX, newY)
+    }
+    window.requestAnimationFrame(loop)
+  }
+  window.requestAnimationFrame(loop)
+</script>   
+</html
