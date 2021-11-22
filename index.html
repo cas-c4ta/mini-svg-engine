@@ -33,11 +33,11 @@
     return brandNewCircle
   }
 
-  function getCirclePos(circle) {
+  function getCirclePos(targetCircle) {
     // Gibt die Werte der Attribute cx und cy zurück.
     // Number() konvertiert einen String in eine Zahl.
-    let cx = Number(circle.getAttribute("cx"))
-    let cy = Number(circle.getAttribute("cy"))
+    let cx = Number(targetCircle.getAttribute("cx"))
+    let cy = Number(targetCircle.getAttribute("cy"))
     return {x: cx, y: cy}
   }
 
